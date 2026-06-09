@@ -1,5 +1,5 @@
 
-<h2 align="left">Hi 👋! I am Demos Alexas</h2>
+<h2 align="left">Hi 👋! I am Akanyane</h2>
 
 ###
 
