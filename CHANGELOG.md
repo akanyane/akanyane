@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.3.0...akanyane-v0.4.0) (2026-07-20)
+
+
+### Features
+
+* rebrand profile README to match akanyane.dev ([4d11710](https://github.com/akanyane/akanyane/commit/4d11710827d7f6e9a015ba3038cdb5a525d8e156))
+
+
+### Bug Fixes
+
+* point stats/top-langs cards to a self-hosted instance ([e67c8f7](https://github.com/akanyane/akanyane/commit/e67c8f7d790b01de4ea4ad60030e68cb8711b554))
+
 ## [0.3.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.2.0...akanyane-v0.3.0) (2026-07-20)
 
 
