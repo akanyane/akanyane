@@ -9,7 +9,7 @@ const dashboardCards = [
 		index: "01",
 		label: "projects",
 		title: "Things I've built",
-		description: "4 shipped · dotfiles to small APIs",
+		description: "5 shipped · dotfiles to small APIs",
 		to: "/projects" as const,
 	},
 	{

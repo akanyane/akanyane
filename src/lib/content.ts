@@ -3,6 +3,8 @@ export interface Project {
 	status: "active" | "archived";
 	description: string;
 	tags: string[];
+	href?: string;
+	homepage?: string;
 }
 
 export const projects: Project[] = [
@@ -12,6 +14,15 @@ export const projects: Project[] = [
 		description:
 			"My personal shell, editor, and terminal configuration — reproducible across machines.",
 		tags: ["Shell", "Neovim", "tmux"],
+	},
+	{
+		name: "One Piece API",
+		status: "active",
+		description:
+			"A REST API for the One Piece anime and manga — characters and images with canonical data pulled straight from the series.",
+		tags: ["TypeScript", "REST API", "One Piece"],
+		href: "https://github.com/akanyane/one-piece-api",
+		homepage: "https://onepieceapi.com",
 	},
 	{
 		name: "reflow",
@@ -33,6 +44,8 @@ export const projects: Project[] = [
 		description:
 			"This site — a single hand-built page listing everything else I make.",
 		tags: ["HTML", "Design"],
+		href: "https://github.com/akanyane/akanyane",
+		homepage: "https://akanyane.dev",
 	},
 ];
 

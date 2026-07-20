@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-
+import { ArrowUpRight, Github } from "lucide-react";
+import type { Project } from "@/lib/content";
 import { projects } from "@/lib/content";
 
 export const Route = createFileRoute("/projects")({ component: Projects });
@@ -17,7 +18,7 @@ function Projects() {
 				{projects.map((project) => (
 					<div
 						key={project.name}
-						className="rounded-[12px] border border-border bg-card p-[28px]"
+						className="flex flex-col rounded-[12px] border border-border bg-card p-[28px]"
 					>
 						<div className="mb-[14px] flex items-center justify-between">
 							<span className="font-mono text-[17px] font-semibold text-foreground">
@@ -36,7 +37,7 @@ function Projects() {
 						<p className="mb-[18px] text-sm leading-[1.6] text-muted-foreground">
 							{project.description}
 						</p>
-						<div className="flex flex-wrap gap-2">
+						<div className="mb-[18px] flex flex-wrap gap-2">
 							{project.tags.map((tag) => (
 								<span
 									key={tag}
@@ -46,9 +47,41 @@ function Projects() {
 								</span>
 							))}
 						</div>
+						<ProjectLinks project={project} />
 					</div>
 				))}
 			</div>
+		</div>
+	);
+}
+
+function ProjectLinks({ project }: { project: Project }) {
+	if (!project.href && !project.homepage) return null;
+
+	return (
+		<div className="mt-auto flex gap-4 border-t border-border pt-[14px]">
+			{project.href ? (
+				<a
+					href={project.href}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="inline-flex items-center gap-[6px] font-mono text-[12px] text-muted-foreground transition-colors hover:text-primary"
+				>
+					<Github size={13} />
+					code
+				</a>
+			) : null}
+			{project.homepage ? (
+				<a
+					href={project.homepage}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="inline-flex items-center gap-[6px] font-mono text-[12px] text-muted-foreground transition-colors hover:text-primary"
+				>
+					<ArrowUpRight size={13} />
+					live
+				</a>
+			) : null}
 		</div>
 	);
 }
