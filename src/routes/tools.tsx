@@ -26,12 +26,12 @@ function Tools() {
 						{group.tools.map((tool) => (
 							<div
 								key={tool.name}
-								className="flex items-baseline justify-between gap-5 border-b border-border py-[18px]"
+								className="flex flex-col gap-1 border-b border-border py-[18px] sm:flex-row sm:items-baseline sm:justify-between sm:gap-5"
 							>
 								<span className="font-mono text-[15px] font-semibold text-foreground">
 									{tool.name}
 								</span>
-								<span className="text-right text-[13px] text-muted-foreground">
+								<span className="text-[13px] text-muted-foreground sm:text-right">
 									{tool.description}
 								</span>
 							</div>

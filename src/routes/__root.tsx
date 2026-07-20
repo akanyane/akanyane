@@ -18,7 +18,7 @@ function RootLayout() {
 	return (
 		<>
 			<Nav />
-			<main className="mx-auto max-w-[1160px] px-8 pt-16 pb-[120px]">
+			<main className="mx-auto max-w-[1160px] px-4 pt-10 pb-20 sm:px-8 sm:pt-16 sm:pb-[120px]">
 				<Outlet />
 			</main>
 			<Footer />

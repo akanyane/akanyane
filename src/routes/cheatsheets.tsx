@@ -43,7 +43,7 @@ function Cheatsheets() {
 				{gitCommands.map((entry) => (
 					<div
 						key={entry.command}
-						className="flex items-center gap-5 border-b border-border px-[26px] py-4 last:border-b-0"
+						className="flex flex-col gap-1 border-b border-border px-4 py-4 last:border-b-0 sm:flex-row sm:items-center sm:gap-5 sm:px-[26px]"
 					>
 						<code className="whitespace-nowrap font-mono text-sm text-primary">
 							{entry.command}

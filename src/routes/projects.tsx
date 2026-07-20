@@ -13,7 +13,7 @@ function Projects() {
 			<h1 className="mb-11 font-mono text-[32px] font-bold text-foreground">
 				Projects
 			</h1>
-			<div className="grid grid-cols-2 gap-[22px]">
+			<div className="grid grid-cols-1 gap-[22px] sm:grid-cols-2">
 				{projects.map((project) => (
 					<div
 						key={project.name}

@@ -48,15 +48,15 @@ function Home() {
 			<div className="mb-[18px] font-mono text-[13px] tracking-[0.08em] text-primary">
 				$ whoami
 			</div>
-			<h1 className="mb-5 max-w-[680px] text-pretty font-mono text-[44px] font-bold leading-[1.2] tracking-[-0.01em] text-foreground">
+			<h1 className="mb-5 max-w-[680px] text-pretty font-mono text-[32px] font-bold leading-[1.2] tracking-[-0.01em] text-foreground sm:text-[44px]">
 				systems, tools & notes from a developer's terminal.
 			</h1>
-			<p className="mb-14 max-w-[560px] text-base leading-[1.7] text-muted-foreground">
+			<p className="mb-10 max-w-[560px] text-base leading-[1.7] text-muted-foreground sm:mb-14">
 				A personal hub for the projects I build, the tools I actually use, and
 				the commands I always forget.
 			</p>
 
-			<div className="mb-[72px] grid grid-cols-3 gap-5">
+			<div className="mb-12 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:mb-[72px] lg:grid-cols-3">
 				{dashboardCards.map((card) => (
 					<Link
 						key={card.to}
