@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.4.1...akanyane-v0.5.0) (2026-07-20)
+
+
+### Features
+
+* add clickable guide detail pages, starting with Nginx + HTTPS ([bbcdaca](https://github.com/akanyane/akanyane/commit/bbcdaca57b6f3b7cd36832fae5323c41ed4eb905))
+* add PM2 guide and reverse-proxy section to the Nginx guide ([273d5c5](https://github.com/akanyane/akanyane/commit/273d5c5dd31423de19124a3614998963421459e2))
+
 ## [0.4.1](https://github.com/akanyane/akanyane/compare/akanyane-v0.4.0...akanyane-v0.4.1) (2026-07-20)
 
 
