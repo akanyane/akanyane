@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.1](https://github.com/akanyane/akanyane/compare/akanyane-v0.4.0...akanyane-v0.4.1) (2026-07-20)
+
+
+### Bug Fixes
+
+* make the site responsive on mobile ([f40ffc2](https://github.com/akanyane/akanyane/commit/f40ffc24735617ba43f80dd77114a882ce0775e3))
+* replace leftover React logo with akanyane brand mark for favicon ([18725b2](https://github.com/akanyane/akanyane/commit/18725b2caf3401d796b8a647caef9336a227126b))
+
 ## [0.4.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.3.0...akanyane-v0.4.0) (2026-07-20)
 
 
