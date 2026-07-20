@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.6.0...akanyane-v0.7.0) (2026-07-20)
+
+
+### Features
+
+* add One Piece API project, link project cards out to code/live ([730bae4](https://github.com/akanyane/akanyane/commit/730bae4795154bb89ee9954ebcf09acf566310a2))
+* expand tools page with editors, BaaS options, and outbound links ([3ad3b9e](https://github.com/akanyane/akanyane/commit/3ad3b9ea98fdd9446ca5e9d30162fd54ea5dfe83))
+
 ## [0.6.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.5.0...akanyane-v0.6.0) (2026-07-20)
 
 
