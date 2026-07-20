@@ -15,3 +15,5 @@ todos.json
 # local reference files / OS metadata, not project source
 *:Zone.Identifier
 /*.zip
+.vercel
+.env*

@@ -47,7 +47,3 @@ export function useTheme() {
 	if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
 	return ctx;
 }
-
-// Runs synchronously in <head>, before hydration, to set the right class
-// and avoid a flash of the wrong theme on load.
-export const themeInitScript = `(function(){try{var t=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});var dark=t!=='light';document.documentElement.classList.toggle('dark',dark);}catch(e){document.documentElement.classList.add('dark');}})();`;

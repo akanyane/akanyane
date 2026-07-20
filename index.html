@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>akanyane.dev — systems, tools &amp; notes from a developer's terminal</title>
+    <meta
+      name="description"
+      content="A personal hub for the projects I build, the tools I actually use, and the commands I always forget."
+    />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <script>
+      (() => {
+        try {
+          document.documentElement.classList.toggle(
+            'dark',
+            localStorage.getItem('akanyane-theme') !== 'light',
+          )
+        } catch {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
