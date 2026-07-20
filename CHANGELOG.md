@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.2.0...akanyane-v0.3.0) (2026-07-20)
+
+
+### Features
+
+* replace footer tagline with social icons ([b4fac37](https://github.com/akanyane/akanyane/commit/b4fac3795d95625d79a47c84b2031710d358312b))
+
+
+### Bug Fixes
+
+* correct footer tagline to match the actual stack ([9a9fe32](https://github.com/akanyane/akanyane/commit/9a9fe3258f24ee9b901a9a4c6fd27df4d45e467d))
+
 ## [0.2.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.1.0...akanyane-v0.2.0) (2026-07-20)
 
 
