@@ -39,6 +39,7 @@ export const projects: Project[] = [
 export interface Tool {
 	name: string;
 	description: string;
+	href?: string;
 }
 
 export interface ToolGroup {
@@ -48,16 +49,42 @@ export interface ToolGroup {
 
 export const toolGroups: ToolGroup[] = [
 	{
-		label: "Editor & Terminal",
+		label: "Editors",
 		tools: [
-			{ name: "Neovim", description: "Modal editor, configured with Lua" },
+			{
+				name: "Neovim",
+				description: "Modal editor, configured with Lua",
+				href: "https://neovim.io",
+			},
+			{
+				name: "Zed",
+				description: "Fast, native multiplayer editor built in Rust",
+				href: "https://zed.dev",
+			},
+			{
+				name: "VS Code",
+				description: "The safe default — an extension for anything",
+				href: "https://code.visualstudio.com",
+			},
+			{
+				name: "Cursor",
+				description: "VS Code fork built around AI-native editing and chat",
+				href: "https://cursor.com",
+			},
+		],
+	},
+	{
+		label: "Terminal & Shell",
+		tools: [
 			{
 				name: "tmux",
 				description: "Terminal multiplexer, sessions that survive reboots",
+				href: "https://tmux.github.io",
 			},
 			{
 				name: "Zsh + Starship",
 				description: "Shell and a fast, minimal prompt",
+				href: "https://starship.rs",
 			},
 		],
 	},
@@ -67,26 +94,63 @@ export const toolGroups: ToolGroup[] = [
 			{
 				name: "ripgrep",
 				description: "Fast recursive search, respects .gitignore",
+				href: "https://github.com/BurntSushi/ripgrep",
 			},
 			{
 				name: "fzf",
 				description: "Fuzzy finder for files, history, everything",
+				href: "https://github.com/junegunn/fzf",
 			},
 			{
 				name: "bat",
 				description: "cat with syntax highlighting and line numbers",
+				href: "https://github.com/sharkdp/bat",
 			},
-			{ name: "jq", description: "JSON slicing and filtering from the shell" },
+			{
+				name: "jq",
+				description: "JSON slicing and filtering from the shell",
+				href: "https://jqlang.github.io/jq/",
+			},
+		],
+	},
+	{
+		label: "Backend & Database",
+		tools: [
+			{
+				name: "Supabase",
+				description: "Postgres, auth, storage, and realtime behind one API",
+				href: "https://supabase.com",
+			},
+			{
+				name: "Convex",
+				description:
+					"Reactive backend — TypeScript functions and a database that pushes updates",
+				href: "https://convex.dev",
+			},
+			{
+				name: "PocketBase",
+				description: "SQLite, auth, and a realtime API in a single Go binary",
+				href: "https://pocketbase.io",
+			},
 		],
 	},
 	{
 		label: "Deploy & Infra",
 		tools: [
-			{ name: "Fly.io", description: "Deploys small apps close to users" },
-			{ name: "Caddy", description: "Reverse proxy with automatic HTTPS" },
+			{
+				name: "Fly.io",
+				description: "Deploys small apps close to users",
+				href: "https://fly.io",
+			},
+			{
+				name: "Caddy",
+				description: "Reverse proxy with automatic HTTPS",
+				href: "https://caddyserver.com",
+			},
 			{
 				name: "Docker Compose",
 				description: "Local multi-container development",
+				href: "https://docs.docker.com/compose/",
 			},
 		],
 	},

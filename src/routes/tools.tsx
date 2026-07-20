@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-
+import { ArrowUpRight } from "lucide-react";
+import type { Tool } from "@/lib/content";
 import { toolGroups } from "@/lib/content";
 
 export const Route = createFileRoute("/tools")({ component: Tools });
@@ -28,9 +29,7 @@ function Tools() {
 								key={tool.name}
 								className="flex flex-col gap-1 border-b border-border py-[18px] sm:flex-row sm:items-baseline sm:justify-between sm:gap-5"
 							>
-								<span className="font-mono text-[15px] font-semibold text-foreground">
-									{tool.name}
-								</span>
+								<ToolName tool={tool} />
 								<span className="text-[13px] text-muted-foreground sm:text-right">
 									{tool.description}
 								</span>
@@ -40,5 +39,30 @@ function Tools() {
 				</div>
 			))}
 		</div>
+	);
+}
+
+function ToolName({ tool }: { tool: Tool }) {
+	if (!tool.href) {
+		return (
+			<span className="font-mono text-[15px] font-semibold text-foreground">
+				{tool.name}
+			</span>
+		);
+	}
+
+	return (
+		<a
+			href={tool.href}
+			target="_blank"
+			rel="noopener noreferrer"
+			className="group inline-flex w-fit items-center gap-1 font-mono text-[15px] font-semibold text-foreground transition-colors hover:text-primary"
+		>
+			{tool.name}
+			<ArrowUpRight
+				size={14}
+				className="text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+			/>
+		</a>
 	);
 }
