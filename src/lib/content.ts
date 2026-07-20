@@ -173,7 +173,8 @@ export type GuideBlock =
 	| { type: "heading"; text: string }
 	| { type: "code"; code: string; label?: string }
 	| { type: "list"; items: string[] }
-	| { type: "note"; text: string };
+	| { type: "note"; text: string }
+	| { type: "link"; text: string; slug: string };
 
 export interface Guide {
 	slug: string;
@@ -255,7 +256,12 @@ export const guides: Guide[] = [
 				type: "code",
 				code: "sudo ufw allow 'Nginx Full'\nsudo ufw status",
 			},
-			{ type: "heading", text: "4. Create a server block for your site" },
+			{ type: "heading", text: "4. Point Nginx at your site" },
+			{
+				type: "paragraph",
+				text: "There are two common setups. If Nginx should serve static files directly, follow 4a. If your site is actually a running app — a Node, Bun, or Python process kept alive by PM2, a systemd service, or Supervisor — it's already listening on a local port, and Nginx just needs to forward requests to it; follow 4b instead.",
+			},
+			{ type: "heading", text: "4a. Serving static files directly" },
 			{
 				type: "paragraph",
 				text: "Create a directory for your site's files and drop in a placeholder page:",
@@ -274,8 +280,30 @@ export const guides: Guide[] = [
 				code: "server {\n    listen 80;\n    listen [::]:80;\n\n    server_name example.com www.example.com;\n    root /var/www/example.com/html;\n    index index.html;\n\n    location / {\n        try_files $uri $uri/ =404;\n    }\n}",
 			},
 			{
+				type: "heading",
+				text: "4b. Reverse proxying to an app on a port",
+			},
+			{
 				type: "paragraph",
-				text: "Enable the site by symlinking it into sites-enabled, then test and reload the config:",
+				text: "Whatever keeps your app running — PM2, a systemd unit, or Supervisor — it should already be bound to a local port (say, 3000) and restarted automatically if it crashes or the server reboots. Nginx doesn't care which of those you used; it only needs the port. Point the server block at it with proxy_pass instead of root:",
+			},
+			{
+				type: "code",
+				label: "/etc/nginx/sites-available/example.com",
+				code: "server {\n    listen 80;\n    listen [::]:80;\n\n    server_name example.com www.example.com;\n\n    location / {\n        proxy_pass http://127.0.0.1:3000;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection 'upgrade';\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_cache_bypass $http_upgrade;\n    }\n}",
+			},
+			{
+				type: "note",
+				text: "The Upgrade/Connection headers let WebSocket connections pass through the proxy — drop them if your app doesn't use WebSockets.",
+			},
+			{
+				type: "link",
+				text: "Need to get the app running and staying up first? See the PM2 guide for Node, Bun, pnpm, and Yarn apps.",
+				slug: "running-apps-with-pm2",
+			},
+			{
+				type: "paragraph",
+				text: "Whichever server block you wrote, enable the site by symlinking it into sites-enabled, then test and reload the config:",
 			},
 			{
 				type: "code",
@@ -288,7 +316,7 @@ export const guides: Guide[] = [
 			{ type: "heading", text: "5. Verify plain HTTP works" },
 			{
 				type: "paragraph",
-				text: "Visit http://example.com in a browser. You should see the placeholder page. Once that works, it's safe to move on to HTTPS.",
+				text: "Visit http://example.com in a browser. You should see the placeholder page, or your app's response if you're reverse proxying. Once that works, it's safe to move on to HTTPS.",
 			},
 			{ type: "heading", text: "6. Install Certbot and get a certificate" },
 			{
@@ -316,6 +344,89 @@ export const guides: Guide[] = [
 			{
 				type: "paragraph",
 				text: "Visit https://example.com — you should get a valid certificate and a padlock in the browser, with http:// requests automatically redirected to https://.",
+			},
+		],
+	},
+	{
+		slug: "running-apps-with-pm2",
+		title: "Running Node, Bun, pnpm, or Yarn apps with PM2",
+		difficulty: "intermediate",
+		readTime: "10 min read",
+		summary:
+			"Keep a long-running app alive on a server — auto-restarts on crash, survives reboots, and stays up whichever package manager you use.",
+		content: [
+			{
+				type: "paragraph",
+				text: "PM2 is a process manager: it starts your app, restarts it if it crashes, keeps logs, and can bring it back up after a server reboot. This covers starting apps run with Node, Bun, pnpm, or Yarn, and getting PM2 itself to survive a reboot.",
+			},
+			{ type: "heading", text: "1. Install PM2" },
+			{
+				type: "paragraph",
+				text: "PM2 itself is a global CLI tool — install it with whichever package manager you have on the server:",
+			},
+			{
+				type: "code",
+				code: "npm install -g pm2\n# or\nbun add -g pm2\n# or\npnpm add -g pm2\n# or\nyarn global add pm2",
+			},
+			{ type: "heading", text: "2. Start your app" },
+			{
+				type: "paragraph",
+				text: "For a plain Node entry file, PM2 can run it directly:",
+			},
+			{ type: "code", code: "pm2 start server.js --name my-app" },
+			{
+				type: "paragraph",
+				text: "If your app is started through a package.json script instead — the common case with Bun, pnpm, or Yarn — quote the whole command and PM2 will run it through a shell:",
+			},
+			{
+				type: "code",
+				code: 'pm2 start "bun run start" --name my-app\n# or\npm2 start "pnpm start" --name my-app\n# or\npm2 start "yarn start" --name my-app',
+			},
+			{
+				type: "note",
+				text: "--name sets the label you'll see in pm2 list and pm2 logs. Without it PM2 falls back to the entry filename, which gets confusing once you're running more than one app.",
+			},
+			{ type: "heading", text: "3. Or define it in an ecosystem file" },
+			{
+				type: "paragraph",
+				text: "For anything you'll redeploy more than once, an ecosystem file beats remembering CLI flags — it's checked into the repo and specifies the working directory, environment variables, and how the app is launched:",
+			},
+			{
+				type: "code",
+				label: "ecosystem.config.js",
+				code: 'module.exports = {\n  apps: [\n    {\n      name: "my-app",\n      script: "pnpm",\n      args: "start",\n      cwd: "/var/www/my-app",\n      env: {\n        NODE_ENV: "production",\n        PORT: 3000,\n      },\n    },\n  ],\n};',
+			},
+			{ type: "code", code: "pm2 start ecosystem.config.js" },
+			{
+				type: "note",
+				text: 'script is the binary PM2 runs and args is what gets passed to it — set script to "bun" or "yarn" the same way to run those instead of pnpm.',
+			},
+			{ type: "heading", text: "4. Everyday commands" },
+			{
+				type: "list",
+				items: [
+					"pm2 list — see every app PM2 is managing, and whether it's up",
+					"pm2 logs my-app — tail stdout/stderr for one app",
+					"pm2 restart my-app — full restart",
+					"pm2 reload my-app — zero-downtime restart, for apps started in cluster mode",
+					"pm2 stop my-app / pm2 delete my-app — stop, or stop and remove from the list",
+					"pm2 monit — live CPU/memory dashboard for all apps",
+				],
+			},
+			{ type: "heading", text: "5. Survive a reboot" },
+			{
+				type: "paragraph",
+				text: "By default, PM2's process list only lives in memory — a server reboot loses it. Save the current list, then generate and run the startup script for your OS's init system:",
+			},
+			{ type: "code", code: "pm2 save\npm2 startup" },
+			{
+				type: "note",
+				text: "pm2 startup prints a command starting with sudo env PATH=... — copy and run that exact line. It registers a systemd (or equivalent) service that restores your saved process list on boot. Run pm2 save again any time you start or stop an app, so the saved list stays current.",
+			},
+			{
+				type: "link",
+				text: "Once the app is up on its port, see the Nginx + HTTPS guide's reverse proxy section to put a domain in front of it.",
+				slug: "nginx-server-with-https",
 			},
 		],
 	},

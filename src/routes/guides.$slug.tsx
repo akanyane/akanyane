@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-
+import type { GuideBlock } from "@/lib/content";
 import { guides } from "@/lib/content";
 
 export const Route = createFileRoute("/guides/$slug")({
@@ -39,76 +39,79 @@ function GuideDetail() {
 
 			{guide.content ? (
 				<div className="flex max-w-[720px] flex-col gap-5">
-					{guide.content.map((block) => {
-						const key =
-							block.type === "list"
-								? block.items[0]
-								: block.type === "code"
-									? block.code
-									: block.text;
-						switch (block.type) {
-							case "heading":
-								return (
-									<h2
-										key={key}
-										className="mt-4 font-mono text-lg font-semibold text-foreground"
-									>
-										{block.text}
-									</h2>
-								);
-							case "paragraph":
-								return (
-									<p
-										key={key}
-										className="text-sm leading-[1.75] text-muted-foreground"
-									>
-										{block.text}
-									</p>
-								);
-							case "note":
-								return (
-									<p
-										key={key}
-										className="rounded-[10px] border border-primary/30 bg-primary/[0.06] px-4 py-3 text-[13px] leading-[1.6] text-foreground"
-									>
-										{block.text}
-									</p>
-								);
-							case "list":
-								return (
-									<ul
-										key={key}
-										className="flex list-disc flex-col gap-[6px] pl-5 text-sm leading-[1.7] text-muted-foreground"
-									>
-										{block.items.map((item) => (
-											<li key={item}>{item}</li>
-										))}
-									</ul>
-								);
-							case "code":
-								return (
-									<div
-										key={key}
-										className="overflow-hidden rounded-[10px] border border-border bg-card"
-									>
-										{block.label ? (
-											<div className="border-b border-border px-4 py-2 font-mono text-[11px] text-muted-foreground">
-												{block.label}
-											</div>
-										) : null}
-										<pre className="overflow-x-auto px-4 py-[14px]">
-											<code className="font-mono text-[13px] leading-[1.6] text-primary">
-												{block.code}
-											</code>
-										</pre>
-									</div>
-								);
-							default:
-								return null;
-						}
-					})}
+					{guide.content.map((block) => (
+						<GuideBlockView key={blockKey(block)} block={block} />
+					))}
 				</div>
 			) : null}
 		</div>
 	);
+}
+
+function blockKey(block: GuideBlock): string {
+	switch (block.type) {
+		case "list":
+			return block.items[0];
+		case "code":
+			return block.code;
+		default:
+			return block.text;
+	}
+}
+
+function GuideBlockView({ block }: { block: GuideBlock }) {
+	switch (block.type) {
+		case "heading":
+			return (
+				<h2 className="mt-4 font-mono text-lg font-semibold text-foreground">
+					{block.text}
+				</h2>
+			);
+		case "paragraph":
+			return (
+				<p className="text-sm leading-[1.75] text-muted-foreground">
+					{block.text}
+				</p>
+			);
+		case "note":
+			return (
+				<p className="rounded-[10px] border border-primary/30 bg-primary/[0.06] px-4 py-3 text-[13px] leading-[1.6] text-foreground">
+					{block.text}
+				</p>
+			);
+		case "link":
+			return (
+				<Link
+					to="/guides/$slug"
+					params={{ slug: block.slug }}
+					className="flex items-center gap-2 font-mono text-[13px] text-primary underline-offset-4 hover:underline"
+				>
+					<span aria-hidden="true">→</span>
+					{block.text}
+				</Link>
+			);
+		case "list":
+			return (
+				<ul className="flex list-disc flex-col gap-[6px] pl-5 text-sm leading-[1.7] text-muted-foreground">
+					{block.items.map((item) => (
+						<li key={item}>{item}</li>
+					))}
+				</ul>
+			);
+		case "code":
+			return (
+				<div className="overflow-hidden rounded-[10px] border border-border bg-card">
+					{block.label ? (
+						<div className="border-b border-border px-4 py-2 font-mono text-[11px] text-muted-foreground">
+							{block.label}
+						</div>
+					) : null}
+					<pre className="overflow-x-auto px-4 py-[14px]">
+						<code className="font-mono text-[13px] leading-[1.6] text-primary">
+							{block.code}
+						</code>
+					</pre>
+				</div>
+			);
+	}
 }
