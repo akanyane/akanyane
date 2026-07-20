@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.5.0...akanyane-v0.6.0) (2026-07-20)
+
+
+### Features
+
+* make all cheat sheet tabs functional, add search and copy ([34ea8b0](https://github.com/akanyane/akanyane/commit/34ea8b081a3297a50fdae7944ac532a6ba304814))
+
 ## [0.5.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.4.1...akanyane-v0.5.0) (2026-07-20)
 
 
