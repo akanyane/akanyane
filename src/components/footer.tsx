@@ -6,7 +6,7 @@ export function Footer() {
 					© 2026 akanyane.dev
 				</span>
 				<span className="font-mono text-xs text-muted-foreground">
-					built with one HTML file
+					built with vite + react
 				</span>
 			</div>
 		</footer>
