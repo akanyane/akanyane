@@ -134,7 +134,7 @@ export const posts: Post[] = [
 	},
 ];
 
-export interface GitCommand {
+export interface CheatsheetEntry {
 	command: string;
 	description: string;
 }
@@ -147,26 +147,147 @@ export const cheatsheetTabs = [
 	"linux perms",
 ] as const;
 
-export const gitCommands: GitCommand[] = [
-	{ command: "git add -p", description: "Stage changes hunk by hunk" },
-	{
-		command: "git commit --amend --no-edit",
-		description: "Add staged changes to the last commit",
-	},
-	{
-		command: "git rebase -i HEAD~3",
-		description: "Interactively edit the last 3 commits",
-	},
-	{ command: 'git stash push -m "wip"', description: "Stash with a message" },
-	{
-		command: "git switch -c branch",
-		description: "Create and switch to a new branch",
-	},
-	{
-		command: "git restore --staged file",
-		description: "Unstage a file, keep the changes",
-	},
-];
+export type CheatsheetTab = (typeof cheatsheetTabs)[number];
+
+export const cheatsheets: Record<CheatsheetTab, CheatsheetEntry[]> = {
+	git: [
+		{ command: "git add -p", description: "Stage changes hunk by hunk" },
+		{
+			command: "git commit --amend --no-edit",
+			description: "Add staged changes to the last commit",
+		},
+		{
+			command: "git rebase -i HEAD~3",
+			description: "Interactively edit the last 3 commits",
+		},
+		{
+			command: 'git stash push -m "wip"',
+			description: "Stash with a message",
+		},
+		{
+			command: "git switch -c branch",
+			description: "Create and switch to a new branch",
+		},
+		{
+			command: "git restore --staged file",
+			description: "Unstage a file, keep the changes",
+		},
+		{
+			command: "git log --oneline --graph --all",
+			description: "Compact branch history as a graph",
+		},
+		{
+			command: "git bisect start",
+			description: "Binary search commits for the one that broke things",
+		},
+	],
+	docker: [
+		{
+			command: "docker ps -a",
+			description: "List all containers, including stopped ones",
+		},
+		{
+			command: "docker exec -it <container> sh",
+			description: "Open a shell inside a running container",
+		},
+		{
+			command: "docker logs -f <container>",
+			description: "Stream logs from a container",
+		},
+		{
+			command: "docker build -t name .",
+			description: "Build an image from the Dockerfile in the current dir",
+		},
+		{
+			command: "docker compose up -d",
+			description: "Start services in the background",
+		},
+		{
+			command: "docker system prune -a",
+			description: "Remove unused containers, networks, and images",
+		},
+		{
+			command: "docker inspect <container>",
+			description: "Show low-level container details as JSON",
+		},
+		{
+			command: "docker cp <container>:/path ./local",
+			description: "Copy a file out of a container",
+		},
+	],
+	tmux: [
+		{ command: "tmux new -s name", description: "Start a new named session" },
+		{
+			command: "tmux attach -t name",
+			description: "Reattach to a running session",
+		},
+		{ command: "tmux ls", description: "List running sessions" },
+		{
+			command: "Ctrl-b d",
+			description: "Detach from the current session",
+		},
+		{
+			command: 'Ctrl-b % / Ctrl-b "',
+			description: "Split the pane vertically / horizontally",
+		},
+		{
+			command: "Ctrl-b <arrow>",
+			description: "Move focus between panes",
+		},
+		{ command: "Ctrl-b c", description: "Create a new window" },
+		{
+			command: "Ctrl-b [",
+			description: "Enter scroll/copy mode",
+		},
+	],
+	regex: [
+		{ command: "^abc", description: "Match abc at the start of a line" },
+		{ command: "abc$", description: "Match abc at the end of a line" },
+		{ command: ".*", description: "Match any characters, greedily" },
+		{ command: "\\d+", description: "One or more digits" },
+		{ command: "(foo|bar)", description: "Match foo or bar" },
+		{
+			command: "(?<=foo)bar",
+			description: "Match bar only when preceded by foo",
+		},
+		{
+			command: "[^abc]",
+			description: "Match any character except a, b, or c",
+		},
+		{ command: "\\b", description: "Word boundary" },
+	],
+	"linux perms": [
+		{
+			command: "chmod 755 file",
+			description: "rwxr-xr-x — owner full, group/others read + execute",
+		},
+		{
+			command: "chmod +x script.sh",
+			description: "Add execute permission for everyone",
+		},
+		{
+			command: "chmod u+x,g-w file",
+			description: "Symbolic form: add exec for owner, remove write for group",
+		},
+		{
+			command: "chown user:group file",
+			description: "Change a file's owner and group",
+		},
+		{
+			command: "ls -l",
+			description: "Show permissions, owner, and group for files",
+		},
+		{
+			command: "umask 022",
+			description: "Set the default permission mask for new files",
+		},
+		{
+			command: "sudo chmod -R 755 dir",
+			description: "Recursively set permissions on a directory",
+		},
+		{ command: "stat file", description: "Show detailed permission metadata" },
+	],
+};
 
 export type GuideBlock =
 	| { type: "paragraph"; text: string }
