@@ -20,5 +20,5 @@ systems, tools & notes from a developer's terminal — building small projects, 
 <div align="left">
   <a href="https://akanyane.dev"><img src="https://img.shields.io/static/v1?message=akanyane.dev&logo=vercel&label=&color=B91C1C&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="website logo" /></a>
   <a href="https://x.com/akanyane_dev"><img src="https://img.shields.io/static/v1?message=X&logo=x&label=&color=B91C1C&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="x logo" /></a>
-  <a href="mailto:hello@akanyane.dev"><img src="https://img.shields.io/static/v1?message=Email&logo=gmail&label=&color=B91C1C&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="email logo" /></a>
+  <a href="mailto:me@akanyane.dev"><img src="https://img.shields.io/static/v1?message=Email&logo=gmail&label=&color=B91C1C&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="email logo" /></a>
 </div>
