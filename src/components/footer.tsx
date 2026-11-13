@@ -1,7 +1,8 @@
-import { Github, Mail, X } from "lucide-react";
+import { Mail, X } from "lucide-react";
+import { GithubIcon } from "@/components/icons";
 
 const socialLinks = [
-	{ label: "GitHub", href: "https://github.com/akanyane", icon: Github },
+	{ label: "GitHub", href: "https://github.com/akanyane", icon: GithubIcon },
 	{ label: "X", href: "#", icon: X },
 	{ label: "Email", href: "mailto:hello@akanyane.dev", icon: Mail },
 ];

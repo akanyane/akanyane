@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { GithubIcon } from "@/components/icons";
 import type { Project } from "@/lib/content";
 import { projects } from "@/lib/content";
 
@@ -67,7 +68,7 @@ function ProjectLinks({ project }: { project: Project }) {
 					rel="noopener noreferrer"
 					className="inline-flex items-center gap-[6px] font-mono text-[12px] text-muted-foreground transition-colors hover:text-primary"
 				>
-					<Github size={13} />
+					<GithubIcon size={13} />
 					code
 				</a>
 			) : null}
