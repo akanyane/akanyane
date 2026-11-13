@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/about")({ component: About });
 
 const contactLinks = [
-	{ label: "hello@akanyane.dev", href: "mailto:hello@akanyane.dev" },
+	{ label: "me@akanyane.dev", href: "mailto:me@akanyane.dev" },
 	{ label: "github.com/akanyane", href: "https://github.com/akanyane" },
-	{ label: "@akanyane", href: "#" },
+	{ label: "@akanyane_dev", href: "https://x.com/akanyane_dev" },
 ];
 
 function About() {

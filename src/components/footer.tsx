@@ -1,10 +1,10 @@
-import { Mail, X } from "lucide-react";
-import { GithubIcon } from "@/components/icons";
+import { Mail } from "lucide-react";
+import { GithubIcon, XIcon } from "@/components/icons";
 
 const socialLinks = [
 	{ label: "GitHub", href: "https://github.com/akanyane", icon: GithubIcon },
-	{ label: "X", href: "#", icon: X },
-	{ label: "Email", href: "mailto:hello@akanyane.dev", icon: Mail },
+	{ label: "X", href: "https://x.com/akanyane_dev", icon: XIcon },
+	{ label: "Email", href: "mailto:me@akanyane.dev", icon: Mail },
 ];
 
 export function Footer() {
