@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/akanyane/akanyane/compare/akanyane-v0.7.0...akanyane-v0.7.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* update X link and contact email ([#12](https://github.com/akanyane/akanyane/issues/12)) ([ce8ea1c](https://github.com/akanyane/akanyane/commit/ce8ea1c7d0b53d686e0fd9120af517dd46198c3a))
+
 ## [0.7.0](https://github.com/akanyane/akanyane/compare/akanyane-v0.6.0...akanyane-v0.7.0) (2026-11-13)
 
 
